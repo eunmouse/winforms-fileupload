@@ -20,7 +20,7 @@ namespace PickingSystem_001
         {
             InitializeComponent();
             dac = new DAC();
-            dac.Dac();
+            dac.MssqlOpen();
         }
 
         private void button1_Click(object sender, EventArgs e)

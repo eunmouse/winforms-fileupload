@@ -13,7 +13,7 @@ namespace PickingSystem_001
         // app.config 에 있는 연결 문자열 읽어오기 
         public static SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DBCON"].ConnectionString);
 
-        public void Dac()
+        public void MssqlOpen()
         {
             try
             {

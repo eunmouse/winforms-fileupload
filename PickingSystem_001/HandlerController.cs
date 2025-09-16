@@ -1,7 +1,5 @@
 ﻿using System;
-using System.IO;
 using System.Runtime.InteropServices;
-using System.Windows.Forms;
 using Microsoft.Office.Interop.Excel;
 using Application = Microsoft.Office.Interop.Excel.Application;
 
@@ -15,23 +13,25 @@ namespace PickingSystem_001
             { 
                 Application application = new Application();
                 Workbook workbook = application.Workbooks.Open(filePath);
-                //Worksheet worksheet = workbook.Worksheets.Item[1]; // 1번째 Worksheet 에 대한 객체 가져오기 
-                Worksheet worksheet = workbook.Worksheets[0];
+                Worksheet worksheet = workbook.Worksheets[1]; // 1번째 Worksheet 에 대한 객체 가져오기 
 
-                // 사용중인 셀 범위 가져오기
-                // Range range = worksheet.Cells["A1:G2"];
+                // 실제로 사용된 셀 범위 가져오기
                 Range range = worksheet.UsedRange;
 
-                for (int row = 1; row <= range.Rows.Count; row++) // 가져온 행만큼 반복
+                // 가져온 행, 열만큼 반복 
+                for (int row = 1; row <= range.Rows.Count; row++) 
                 {
-                    for (int column = 1; column <= range.Columns.Count; column++) // 가져온 열만큼 반복
+                    for (int column = 1; column <= range.Columns.Count; column++) 
                     {
-                        Object value = range.Cells[row, column].Value; // 무조건 Object 타입 반환 
-
-                        string str = value?.ToString(); // value 가 null 이면 str 도 null, value 가 null 이 아니면 ToString() 호출하여 문자열 반환
+                        // Object 타입 반환 (실제로는 COM 객체 -> Excel.Range) 
+                        Object value = ((Range)range.Cells[row, column]).Value2;
+                        string str = Convert.ToString(value);
+                        
+                        Console.Write(value + " ");
                     }
+                    Console.WriteLine();
                 }
-
+                DisposeObject(range);
                 DisposeObject(worksheet);
                 DisposeObject(workbook);
                 DisposeObject(application);
