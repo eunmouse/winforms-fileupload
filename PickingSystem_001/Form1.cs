@@ -20,6 +20,7 @@ namespace PickingSystem_001
         {
             InitializeComponent();
             dac = new DAC();
+            // DB 연결
             dac.MssqlOpen();
         }
 
@@ -33,12 +34,22 @@ namespace PickingSystem_001
                 // 확인 버튼 눌렀을 때 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    filePath = openFileDialog.FileName;
-
-                    HandlerController handlerController = new HandlerController();
+                    txtPath.Text = openFileDialog.FileName;
+                    filePath = txtPath.Text;
+                    writeRtbNotice("파일 업로드중... 시간 꽤 소요됨...");
+                    HandlerController handlerController = new HandlerController(this);
                     handlerController.ReadExcelSheet(filePath);
                 }
             }
+        }
+        public void writeRtbNotice(string str)
+        {
+            rtbNotice.AppendText(str + Environment.NewLine); // 줄바꿈
+        }
+        private void frmSystem_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // DB 연결 끊기
+            dac.MssqlClose();
         }
     }
 }

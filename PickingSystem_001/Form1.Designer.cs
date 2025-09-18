@@ -31,6 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSystem));
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.btnUpload = new System.Windows.Forms.Button();
+            this.btnSelect = new System.Windows.Forms.Button();
+            this.txtPath = new System.Windows.Forms.TextBox();
+            this.rtbNotice = new System.Windows.Forms.RichTextBox();
+            this.lblUpload = new System.Windows.Forms.Label();
+            this.lblSelect = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -44,13 +49,47 @@
             this.btnUpload.UseVisualStyleBackColor = true;
             this.btnUpload.Click += new System.EventHandler(this.button1_Click);
             // 
+            // btnSelect
+            // 
+            resources.ApplyResources(this.btnSelect, "btnSelect");
+            this.btnSelect.Name = "btnSelect";
+            this.btnSelect.UseVisualStyleBackColor = true;
+            // 
+            // txtPath
+            // 
+            resources.ApplyResources(this.txtPath, "txtPath");
+            this.txtPath.Name = "txtPath";
+            this.txtPath.ReadOnly = true;
+            // 
+            // rtbNotice
+            // 
+            resources.ApplyResources(this.rtbNotice, "rtbNotice");
+            this.rtbNotice.Name = "rtbNotice";
+            // 
+            // lblUpload
+            // 
+            resources.ApplyResources(this.lblUpload, "lblUpload");
+            this.lblUpload.Name = "lblUpload";
+            // 
+            // lblSelect
+            // 
+            resources.ApplyResources(this.lblSelect, "lblSelect");
+            this.lblSelect.Name = "lblSelect";
+            // 
             // frmSystem
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lblSelect);
+            this.Controls.Add(this.lblUpload);
+            this.Controls.Add(this.rtbNotice);
+            this.Controls.Add(this.txtPath);
+            this.Controls.Add(this.btnSelect);
             this.Controls.Add(this.btnUpload);
             this.Name = "frmSystem";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmSystem_FormClosing);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -58,6 +97,11 @@
 
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button btnUpload;
+        private System.Windows.Forms.Button btnSelect;
+        private System.Windows.Forms.TextBox txtPath;
+        private System.Windows.Forms.RichTextBox rtbNotice;
+        private System.Windows.Forms.Label lblUpload;
+        private System.Windows.Forms.Label lblSelect;
     }
 }
 
