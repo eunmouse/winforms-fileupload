@@ -54,19 +54,24 @@ namespace PickingSystem_001
 
                 using (command = new SqlCommand(sql, connection))
                 {
-                    //command.Parameters.Add("@pickingDate", SqlDbType.Date);
+                    command.Parameters.Add("@pickingDate", SqlDbType.NVarChar);
+                    command.Parameters.Add("@custCode", SqlDbType.NVarChar);
+                    command.Parameters.Add("@custName", SqlDbType.NVarChar);
+                    command.Parameters.Add("@pickingCode", SqlDbType.NVarChar);
+                    command.Parameters.Add("@itemCode", SqlDbType.NVarChar);
+                    command.Parameters.Add("@itemName", SqlDbType.NVarChar);
+                    command.Parameters.Add("@qty", SqlDbType.Int);
 
                     foreach (DataRow dr in rows)
                     {
                         // SQL 파라미터 바인딩
-                        command.Parameters.Clear();
-                        command.Parameters.AddWithValue("@pickingDate", dr["pickingDate"] ?? DBNull.Value); // ?? 왼쪽 값이 null 이면 오른쪽 값을 대신 사용 (DB 에 NULL 넣으려면 DBNull.Value 넣어야 함)
-                        command.Parameters.AddWithValue("@custCode", dr["custCode"] ?? DBNull.Value);
-                        command.Parameters.AddWithValue("@custName", dr["custName"] ?? DBNull.Value);
-                        command.Parameters.AddWithValue("@pickingCode", dr["pickingCode"] ?? DBNull.Value);
-                        command.Parameters.AddWithValue("@itemCode", dr["itemCode"] ?? DBNull.Value);
-                        command.Parameters.AddWithValue("@itemName", dr["itemName"] ?? DBNull.Value);
-                        command.Parameters.AddWithValue("qty", dr["qty"] ?? DBNull.Value);
+                        command.Parameters["@pickingDate"].Value = dr["pickingDate"]; 
+                        command.Parameters["@custCode"].Value = dr["custCode"];
+                        command.Parameters["@custName"].Value = dr["custName"];
+                        command.Parameters["@pickingCode"].Value = dr["pickingCode"];
+                        command.Parameters["@itemCode"].Value = dr["itemCode"];
+                        command.Parameters["@itemName"].Value = dr["itemName"];
+                        command.Parameters["@qty"].Value = dr["qty"];
                         command.ExecuteNonQuery();
                     }
                 }
