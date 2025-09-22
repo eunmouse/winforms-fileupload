@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Office.Interop.Excel;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -44,20 +45,30 @@ namespace PickingSystem_001
             }
         }
 
-        public void ExcuteNonQuery(string sql, Dictionary<string, object> rawData)
+        public void ExcuteNonQuery(string sql, DataRowCollection rows)
         {
             // 쿼리 실행 (INSERT / UPDATE / DELETE 문)
             using (connection = new SqlConnection(dbAddr))
             {
                 connection.Open();
-           
+
                 using (command = new SqlCommand(sql, connection))
                 {
-                    foreach (var param in rawData)
+                    //command.Parameters.Add("@pickingDate", SqlDbType.Date);
+
+                    foreach (DataRow dr in rows)
                     {
-                        command.Parameters.AddWithValue(param.Key, param.Value ?? DBNull.Value);
+                        // SQL 파라미터 바인딩
+                        command.Parameters.Clear();
+                        command.Parameters.AddWithValue("@pickingDate", dr["pickingDate"] ?? DBNull.Value); // ?? 왼쪽 값이 null 이면 오른쪽 값을 대신 사용 (DB 에 NULL 넣으려면 DBNull.Value 넣어야 함)
+                        command.Parameters.AddWithValue("@custCode", dr["custCode"] ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@custName", dr["custName"] ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@pickingCode", dr["pickingCode"] ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@itemCode", dr["itemCode"] ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@itemName", dr["itemName"] ?? DBNull.Value);
+                        command.Parameters.AddWithValue("qty", dr["qty"] ?? DBNull.Value);
+                        command.ExecuteNonQuery();
                     }
-                    command.ExecuteNonQuery();
                 }
             }
         }

@@ -8,3 +8,13 @@ C:\Users\asetec\source\repos\PickingSystem_001\PickingSystem_001\obj\Debug\Picki
 C:\Users\asetec\source\repos\PickingSystem_001\PickingSystem_001\obj\Debug\PickingSystem_001.csproj.CoreCompileInputs.cache
 C:\Users\asetec\source\repos\PickingSystem_001\PickingSystem_001\obj\Debug\PickingSystem_001.exe
 C:\Users\asetec\source\repos\PickingSystem_001\PickingSystem_001\obj\Debug\PickingSystem_001.pdb
+C:\Users\USER\source\repos\PickingSystem_001\Source\PickingSystem_001\bin\Debug\PickingSystem_001.exe.config
+C:\Users\USER\source\repos\PickingSystem_001\Source\PickingSystem_001\bin\Debug\PickingSystem_001.exe
+C:\Users\USER\source\repos\PickingSystem_001\Source\PickingSystem_001\bin\Debug\PickingSystem_001.pdb
+C:\Users\USER\source\repos\PickingSystem_001\Source\PickingSystem_001\obj\Debug\PickingSystem_001.frmSystem.resources
+C:\Users\USER\source\repos\PickingSystem_001\Source\PickingSystem_001\obj\Debug\PickingSystem_001.Properties.Resources.resources
+C:\Users\USER\source\repos\PickingSystem_001\Source\PickingSystem_001\obj\Debug\PickingSystem_001.csproj.GenerateResource.cache
+C:\Users\USER\source\repos\PickingSystem_001\Source\PickingSystem_001\obj\Debug\PickingSystem_001.csproj.CoreCompileInputs.cache
+C:\Users\USER\source\repos\PickingSystem_001\Source\PickingSystem_001\obj\Debug\PickingSystem_001.exe
+C:\Users\USER\source\repos\PickingSystem_001\Source\PickingSystem_001\obj\Debug\PickingSystem_001.pdb
+C:\Users\USER\source\repos\PickingSystem_001\Source\PickingSystem_001\obj\Debug\PickingSystem_001.csprojResolveAssemblyReference.cache

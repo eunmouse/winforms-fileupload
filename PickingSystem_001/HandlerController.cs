@@ -1,8 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data;
 using System.Runtime.InteropServices;
 using Microsoft.Office.Interop.Excel;
 using Application = Microsoft.Office.Interop.Excel.Application;
+// using DataTable = Microsoft.Office.Interop.Excel.DataTable;
+using DataTable = System.Data.DataTable;
 
 namespace PickingSystem_001
 {
@@ -25,38 +27,44 @@ namespace PickingSystem_001
 
             // A 열부터 I 열까지 가져오기
             Range range = worksheet.Range["A:I"];
+            Range used = worksheet.UsedRange;
+            _form.writeRtbNotice("파일 데이터 읽고 데이터 DB에 바로 넣을거임... 시간 꽤 소요됨...");
+
+            // DataTable 생성 및 컬럼 설정
+            DataTable dt = new DataTable();
+            dt.Columns.Add("pickingDate", typeof(string));
+            dt.Columns.Add("custCode", typeof(string));
+            dt.Columns.Add("custName", typeof(string));
+            dt.Columns.Add("pickingCode", typeof(string));
+            dt.Columns.Add("itemCode", typeof(string));
+            dt.Columns.Add("itemName", typeof(string));
+            dt.Columns.Add("qty", typeof(int));
 
             try
-            { 
-                _form.writeRtbNotice("파일 데이터 읽는중... 시간 꽤 소요됨...");
-                List<Dictionary<string, object>> paramList = new List<Dictionary<string, object>>();
-                _form.writeRtbNotice("데이터 DB에 넣기 시작할거임...");
+            {
                 int row = 2; // 두번째 행 부터 시작 
                 do
-                {    
-                    Dictionary<string, object> parameters = new Dictionary<string, object>();
+                {
+                    DataRow dr = dt.NewRow();
+                    // Object 타입 반환 (실제로는 COM 객체 -> Excel.Range) 
+                    dr["pickingDate"] = Convert.ToString(((Range)range.Cells[row, 2]).Value2); // B열 피킹일자
+                    dr["custCode"] = Convert.ToString(((Range)range.Cells[row, 5]).Value2); // E열 거래처코드
+                    dr["custName"] = Convert.ToString(((Range)range.Cells[row, 6]).Value2); // F열 거래처명
+                    dr["pickingCode"] = Convert.ToString(((Range)range.Cells[row, 4]).Value2); // D열 피킹번호
+                    dr["itemCode"] = Convert.ToString(((Range)range.Cells[row, 7]).Value2); // G열 제품코드
+                    dr["itemName"] = Convert.ToString(((Range)range.Cells[row, 8]).Value2); // H열 제품명 
+                    dr["qty"] = Convert.ToInt32(((Range)range.Cells[row, 9]).Value2); // I열 피킹수량
 
-                    for (int column = 1; column <= range.Columns.Count; column++)
-                    {
-                        // Object 타입 반환 (실제로는 COM 객체 -> Excel.Range) 
-                        parameters["@pickingDate"] = Convert.ToString(((Range)range.Cells[row, 2]).Value2); // B열 피킹일자
-                        parameters["@custCode"] = Convert.ToString(((Range)range.Cells[row, 5]).Value2); // E열 거래처코드
-                        parameters["@custName"] = Convert.ToString(((Range)range.Cells[row, 6]).Value2); // F열 거래처명
-                        parameters["@pickingCode"] = Convert.ToString(((Range)range.Cells[row, 4]).Value2); // D열 피킹번호
-                        parameters["@itemCode"] = Convert.ToString(((Range)range.Cells[row, 7]).Value2); // G열 제품코드
-                        parameters["@itemName"] = Convert.ToString(((Range)range.Cells[row, 8]).Value2); // H열 제품명 
-                        parameters["@qty"] = Convert.ToInt32(((Range)range.Cells[row, 9]).Value2); // I열 피킹수량
-                    }
-                    // paramList.Add(parameters);
-
-                    // 한줄씩 
-                    string query = "INSERT INTO tb_rawdata (PICKING_DATE, CUST_CODE, CUST_NAME, PICKING_CODE, ITEM_CODE, ITEM_NAME, QTY)" +
-                        "VALUES (@pickingDate, @custCode, @custName, @pickingCode, @itemCode, @itemName, @qty)";
-                    dac.ExcuteNonQuery(query, parameters);
+                    // 행 추가 
+                    dt.Rows.Add(dr);   
                     row++;
                 }
-                while (row > range.Rows.Count);
-                
+                while (used.Rows.Count >= row);
+                // 한줄씩 
+                string query = "INSERT INTO tb_rawdata (PICKING_DATE, CUST_CODE, CUST_NAME, PICKING_CODE, ITEM_CODE, ITEM_NAME, QTY)" +
+                    "VALUES (@pickingDate, @custCode, @custName, @pickingCode, @itemCode, @itemName, @qty)";
+                dac.ExcuteNonQuery(query, dt.Rows);
+
                 _form.writeRtbNotice("데이터 입력성공 축하...");
 
                 DisposeObject(range);

@@ -1,0 +1,122 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\USER\\source\\repos\\PickingSystem_001\\Source\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{93028847-51C0-424D-8976-2888BB96AC19}|PickingSystem_001\\PickingSystem_001.csproj|c:\\users\\user\\source\\repos\\pickingsystem_001\\source\\pickingsystem_001\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{93028847-51C0-424D-8976-2888BB96AC19}|PickingSystem_001\\PickingSystem_001.csproj|solutionrelative:pickingsystem_001\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93028847-51C0-424D-8976-2888BB96AC19}|PickingSystem_001\\PickingSystem_001.csproj|c:\\users\\user\\source\\repos\\pickingsystem_001\\source\\pickingsystem_001\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93028847-51C0-424D-8976-2888BB96AC19}|PickingSystem_001\\PickingSystem_001.csproj|solutionrelative:pickingsystem_001\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93028847-51C0-424D-8976-2888BB96AC19}|PickingSystem_001\\PickingSystem_001.csproj|c:\\users\\user\\source\\repos\\pickingsystem_001\\source\\pickingsystem_001\\handlercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93028847-51C0-424D-8976-2888BB96AC19}|PickingSystem_001\\PickingSystem_001.csproj|solutionrelative:pickingsystem_001\\handlercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93028847-51C0-424D-8976-2888BB96AC19}|PickingSystem_001\\PickingSystem_001.csproj|c:\\users\\user\\source\\repos\\pickingsystem_001\\source\\pickingsystem_001\\dac.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93028847-51C0-424D-8976-2888BB96AC19}|PickingSystem_001\\PickingSystem_001.csproj|solutionrelative:pickingsystem_001\\dac.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93028847-51C0-424D-8976-2888BB96AC19}|PickingSystem_001\\PickingSystem_001.csproj|c:\\users\\user\\source\\repos\\pickingsystem_001\\source\\pickingsystem_001\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{93028847-51C0-424D-8976-2888BB96AC19}|PickingSystem_001\\PickingSystem_001.csproj|solutionrelative:pickingsystem_001\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|PickingSystem_001||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93028847-51C0-424D-8976-2888BB96AC19}|PickingSystem_001\\PickingSystem_001.csproj|c:\\users\\user\\source\\repos\\pickingsystem_001\\source\\pickingsystem_001\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|5e9a8ac2-4f34-4521-858f-4c248ba31532"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs [\uB514\uC790\uC778]",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\PickingSystem_001\\Source\\PickingSystem_001\\Form1.cs",
+              "RelativeDocumentMoniker": "PickingSystem_001\\Form1.cs",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\PickingSystem_001\\Source\\PickingSystem_001\\Form1.cs [\uB514\uC790\uC778]",
+              "RelativeToolTip": "PickingSystem_001\\Form1.cs [\uB514\uC790\uC778]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-19T04:29:10.91Z",
+              "EditorCaption": " [\uB514\uC790\uC778]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\PickingSystem_001\\Source\\PickingSystem_001\\Program.cs",
+              "RelativeDocumentMoniker": "PickingSystem_001\\Program.cs",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\PickingSystem_001\\Source\\PickingSystem_001\\Program.cs",
+              "RelativeToolTip": "PickingSystem_001\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-19T04:29:08.803Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "HandlerController.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\PickingSystem_001\\Source\\PickingSystem_001\\HandlerController.cs",
+              "RelativeDocumentMoniker": "PickingSystem_001\\HandlerController.cs",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\PickingSystem_001\\Source\\PickingSystem_001\\HandlerController.cs",
+              "RelativeToolTip": "PickingSystem_001\\HandlerController.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAAAwEUAAABvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-19T04:28:49.944Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DAC.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\PickingSystem_001\\Source\\PickingSystem_001\\DAC.cs",
+              "RelativeDocumentMoniker": "PickingSystem_001\\DAC.cs",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\PickingSystem_001\\Source\\PickingSystem_001\\DAC.cs",
+              "RelativeToolTip": "PickingSystem_001\\DAC.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAAnwEYAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-19T04:27:58.962Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "App.config",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\PickingSystem_001\\Source\\PickingSystem_001\\App.config",
+              "RelativeDocumentMoniker": "PickingSystem_001\\App.config",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\PickingSystem_001\\Source\\PickingSystem_001\\App.config",
+              "RelativeToolTip": "PickingSystem_001\\App.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-09-19T04:27:55.782Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PickingSystem_001",
+              "DocumentMoniker": "C:\\Users\\USER\\source\\repos\\PickingSystem_001\\Source\\PickingSystem_001\\PickingSystem_001.csproj",
+              "RelativeDocumentMoniker": "PickingSystem_001\\PickingSystem_001.csproj",
+              "ToolTip": "C:\\Users\\USER\\source\\repos\\PickingSystem_001\\Source\\PickingSystem_001\\PickingSystem_001.csproj",
+              "RelativeToolTip": "PickingSystem_001\\PickingSystem_001.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-09-19T04:27:02.508Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
