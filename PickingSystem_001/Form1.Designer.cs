@@ -36,6 +36,8 @@
             this.rtbNotice = new System.Windows.Forms.RichTextBox();
             this.lblUpload = new System.Windows.Forms.Label();
             this.lblSelect = new System.Windows.Forms.Label();
+            this.btnReset = new System.Windows.Forms.Button();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -54,6 +56,7 @@
             resources.ApplyResources(this.btnSelect, "btnSelect");
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.UseVisualStyleBackColor = true;
+            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
             // txtPath
             // 
@@ -76,10 +79,25 @@
             resources.ApplyResources(this.lblSelect, "lblSelect");
             this.lblSelect.Name = "lblSelect";
             // 
+            // btnReset
+            // 
+            resources.ApplyResources(this.btnReset, "btnReset");
+            this.btnReset.Name = "btnReset";
+            this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.AllowDrop = true;
+            resources.ApplyResources(this.dateTimePicker1, "dateTimePicker1");
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            // 
             // frmSystem
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.btnReset);
             this.Controls.Add(this.lblSelect);
             this.Controls.Add(this.lblUpload);
             this.Controls.Add(this.rtbNotice);
@@ -102,6 +120,8 @@
         private System.Windows.Forms.RichTextBox rtbNotice;
         private System.Windows.Forms.Label lblUpload;
         private System.Windows.Forms.Label lblSelect;
+        private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
     }
 }
 

@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 namespace PickingSystem_001
 {
     // DB 연결/쿼리 실행/데이터 반환 전담 클래스 
-    public class DAC
+    public class Dac
     {
         private string dbAddr = ConfigurationManager.ConnectionStrings["DBCON"].ConnectionString;
         private SqlConnection connection; // DB 연결
@@ -19,10 +19,9 @@ namespace PickingSystem_001
         {
             using (connection = new SqlConnection(dbAddr))
             {
-                // DB 연결되는지 확인
                 try
                 {
-
+                    // 가장 먼저 DB 연결 문제없는지 확인
                     connection.Open();
 
                     if (connection.State != ConnectionState.Open)
@@ -30,11 +29,11 @@ namespace PickingSystem_001
                         Console.WriteLine("연결 실패");
                     }
                 }
-                catch (ConfigurationException cex)
+                catch (ConfigurationException cex) // 구성 오류 
                 {
                     Console.WriteLine(cex.Message);
                 }
-                catch (SqlException sqlex)
+                catch (SqlException sqlex) // 접속 오류 
                 {
                     Console.WriteLine(sqlex.Message);
                 }
@@ -44,13 +43,53 @@ namespace PickingSystem_001
                 }
             }
         }
-
+        public List<Dictionary<string, object>> ExcuteQuery(string sql, string date)
+        {
+            // 쿼리 실행 (SELECT 문) 
+            using (connection = new SqlConnection(dbAddr))
+            {
+                connection.Open();
+                adapter = new SqlDataAdapter();
+                DataSet ds = new DataSet();
+                List<Dictionary<string, object>> list = new List<Dictionary<string, object>>();
+                
+                // 파라미터 타입 및 값 입력
+                using (command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@date", date);
+                    adapter.SelectCommand = command;
+                    adapter.Fill(ds);
+                 
+                    if (ds.Tables.Count > 0)
+                    {
+                        foreach (DataRow dr in ds.Tables[0].Rows)
+                        {
+                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                            dictionary["picking_date"] = dr["PICKING_DATE"].ToString();
+                            dictionary["cust_code"] = dr["CUST_CODE"].ToString();
+                            dictionary["cust_name"] = dr["CUST_NAME"].ToString();
+                            dictionary["picking_code"] = dr["PICKING_CODE"].ToString();
+                            dictionary["item_code"] = dr["ITEM_CODE"].ToString();
+                            dictionary["item_name"] = dr["ITEM_NAME"].ToString();
+                            dictionary["qty"] = dr["QTY"].ToString();
+                            list.Add(dictionary);
+                        }
+                        return list;
+                    }
+                    else
+                    {
+                        return list;
+                    }
+                }
+            }
+        }
         public void ExcuteNonQuery(string sql, DataRowCollection rows)
         {
             // 쿼리 실행 (INSERT / UPDATE / DELETE 문)
             using (connection = new SqlConnection(dbAddr))
             {
                 connection.Open();
+                //int result = 0;
 
                 using (command = new SqlCommand(sql, connection))
                 {
@@ -74,6 +113,7 @@ namespace PickingSystem_001
                         command.Parameters["@qty"].Value = dr["qty"];
                         command.ExecuteNonQuery();
                     }
+                    //return result;
                 }
             }
         }

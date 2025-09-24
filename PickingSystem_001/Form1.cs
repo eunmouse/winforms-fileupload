@@ -5,16 +5,18 @@ namespace PickingSystem_001
 {
     public partial class frmSystem : Form
     {
-        private DAC dac;
-        private string filePath = string.Empty; // 빈문자열 ""
+        private Dac dac;
+        private HandlerController handlerController;
+        private string filePath = string.Empty;
+        private string date = string.Empty;
 
         public frmSystem()
         {
             InitializeComponent();
-            dac = new DAC();
-            // DB 연결
+            dac = new Dac();
             dac.MssqlOpen();
-        }
+            handlerController = new HandlerController(this);
+    }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -28,12 +30,19 @@ namespace PickingSystem_001
                 {
                     txtPath.Text = openFileDialog.FileName;
                     filePath = txtPath.Text;
-                    writeRtbNotice("파일 업로드중... 시간 꽤 소요됨...");
-                    HandlerController handlerController = new HandlerController(this);
-                    handlerController.ReadExcelSheet(filePath);
+                    writeRtbNotice("파일 업로드중...");
+                    handlerController.UploadExcelSheet(filePath);
                 }
             }
         }
+
+        private void btnSelect_Click(object sender, EventArgs e)
+        {
+            // DB 조회
+            string strDate = dateTimePicker1.Value.ToString("yyyy-MM-dd");
+            handlerController.ReadStoredData(strDate);
+        }
+
         public void writeRtbNotice(string str)
         {
             rtbNotice.AppendText(str + Environment.NewLine); // 줄바꿈
@@ -42,6 +51,11 @@ namespace PickingSystem_001
         {
             // DB 연결 끊기
             dac.MssqlClose();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            rtbNotice.Clear();
         }
     }
 }

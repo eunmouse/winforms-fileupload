@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
+using System.IO;
 using System.Runtime.InteropServices;
 using Microsoft.Office.Interop.Excel;
 using Application = Microsoft.Office.Interop.Excel.Application;
@@ -11,7 +14,7 @@ namespace PickingSystem_001
     class HandlerController
     {
         private frmSystem _form;
-        private DAC dac = new DAC();
+        private Dac dac = new Dac();
 
         // 생성자로 frmSystem 객체를 받아옴
         public HandlerController(frmSystem form)
@@ -19,15 +22,44 @@ namespace PickingSystem_001
             _form = form;
         }
 
-        public void ReadExcelSheet(string filePath)
+        public void ReadStoredData(string date)
+        {
+            string query = "SELECT * FROM tb_rawdata WHERE picking_date = @date " +
+                "ORDER BY PICKING_DATE ASC";
+            _form.writeRtbNotice("tb_rawdata 테이블 조회 시작..");
+
+            try
+            {
+                // DB 조회 
+                List<Dictionary<string, object>> dataList = dac.ExcuteQuery(query, date);
+                foreach (Dictionary<string, object> dictionary in dataList)
+                {
+                    string pickingDate = dictionary["picking_date"].ToString();
+                    string custCode = dictionary["cust_code"].ToString();
+                    string custName = dictionary["cust_name"].ToString();
+                    string pickingCode = dictionary["picking_code"].ToString();
+                    string itemCode = dictionary["item_code"].ToString();
+                    string itemName = dictionary["item_name"].ToString();
+                    string qty = dictionary["qty"].ToString();
+                    _form.writeRtbNotice(pickingDate + " " + custCode + " " + custName + " " + pickingCode + " " + itemCode + " " + itemName + " " + qty);
+                }
+            }
+            catch (Exception ex)
+            {
+                _form.writeRtbNotice("데이터 불러오는 도중 오류 발생...");
+                Console.WriteLine("ReadStoredData 에서 오류 발생 : " + ex.Message);
+            }
+            
+        }
+
+        public void UploadExcelSheet(string filePath)
         {
             Application application = new Application();
             Workbook workbook = application.Workbooks.Open(filePath);
             Worksheet worksheet = workbook.Worksheets[1]; // 1번째 Worksheet 에 대한 객체 가져오기 
 
             // A 열부터 I 열까지 가져오기
-            Range range = worksheet.Range["A:I"];
-            Range used = worksheet.UsedRange;
+            Range range = worksheet.Range["A:I"]; // Range used = worksheet.UsedRange;
             _form.writeRtbNotice("파일 데이터 읽고 데이터 DB에 바로 넣을거임... 시간 꽤 소요됨...");
 
             // DataTable 생성 및 컬럼 설정
@@ -45,6 +77,12 @@ namespace PickingSystem_001
                 int row = 2; // 두번째 행 부터 시작 
                 do
                 {
+                    // 엑셀 A열 셀이 공백/Null 이면 반복문에서 break; 로 빠지도록 수정 
+                    string temp = Convert.ToString(((Range)range.Cells[row, 1]).Value2); // A열 출고구분
+                    if (string.IsNullOrWhiteSpace(temp))
+                    {
+                        break;
+                    }
                     DataRow dr = dt.NewRow();
                     // Object 타입 반환 (실제로는 COM 객체 -> Excel.Range) 
                     dr["pickingDate"] = Convert.ToString(((Range)range.Cells[row, 2]).Value2); // B열 피킹일자
@@ -59,13 +97,15 @@ namespace PickingSystem_001
                     dt.Rows.Add(dr);   
                     row++;
                 }
-                while (used.Rows.Count >= row);
+                while (true);
                 // 한줄씩 
                 string query = "INSERT INTO tb_rawdata (PICKING_DATE, CUST_CODE, CUST_NAME, PICKING_CODE, ITEM_CODE, ITEM_NAME, QTY)" +
                     "VALUES (@pickingDate, @custCode, @custName, @pickingCode, @itemCode, @itemName, @qty)";
                 dac.ExcuteNonQuery(query, dt.Rows);
+                //int result = dac.ExcuteNonQuery(query, dt.Rows);
 
                 _form.writeRtbNotice("데이터 입력성공 축하...");
+                //_form.writeRtbNotice("총 " + result + "건의 데이터가 추가되었습니다.");
 
                 DisposeObject(range);
                 DisposeObject(worksheet);

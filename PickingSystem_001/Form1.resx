@@ -122,7 +122,7 @@
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnUpload.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 12</value>
+    <value>475, 9</value>
   </data>
   <data name="btnUpload.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 23</value>
@@ -144,14 +144,14 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnUpload.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnSelect.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btnSelect.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 41</value>
+    <value>372, 39</value>
   </data>
   <data name="btnSelect.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 23</value>
@@ -172,13 +172,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnSelect.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="txtPath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>219, 12</value>
+    <value>143, 9</value>
   </data>
   <data name="txtPath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>428, 21</value>
+    <value>327, 21</value>
   </data>
   <data name="txtPath.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -193,13 +193,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;txtPath.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="rtbNotice.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 79</value>
+    <value>12, 77</value>
   </data>
   <data name="rtbNotice.Size" type="System.Drawing.Size, System.Drawing">
-    <value>635, 344</value>
+    <value>700, 345</value>
   </data>
   <data name="rtbNotice.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -217,13 +217,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rtbNotice.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="lblUpload.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lblUpload.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 17</value>
+    <value>57, 14</value>
   </data>
   <data name="lblUpload.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 12</value>
@@ -244,7 +244,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblUpload.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="lblSelect.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -253,7 +253,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSelect.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 46</value>
+    <value>57, 43</value>
   </data>
   <data name="lblSelect.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 12</value>
@@ -274,6 +274,60 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblSelect.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="btnReset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnReset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>475, 39</value>
+  </data>
+  <data name="btnReset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 23</value>
+  </data>
+  <data name="btnReset.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="btnReset.Text" xml:space="preserve">
+    <value>초기화</value>
+  </data>
+  <data name="&gt;&gt;btnReset.Name" xml:space="preserve">
+    <value>btnReset</value>
+  </data>
+  <data name="&gt;&gt;btnReset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnReset.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnReset.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="dateTimePicker1.CustomFormat" xml:space="preserve">
+    <value>yyyy-MM-dd</value>
+  </data>
+  <data name="dateTimePicker1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>143, 39</value>
+  </data>
+  <data name="dateTimePicker1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="dateTimePicker1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>197, 21</value>
+  </data>
+  <data name="dateTimePicker1.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;dateTimePicker1.Name" xml:space="preserve">
+    <value>dateTimePicker1</value>
+  </data>
+  <data name="&gt;&gt;dateTimePicker1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dateTimePicker1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;dateTimePicker1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -283,7 +337,7 @@
     <value>7, 12</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>659, 435</value>
+    <value>724, 435</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>PickingSystem_001</value>
