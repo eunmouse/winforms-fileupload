@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Windows.Forms;
 
 namespace PickingSystem_001
@@ -31,7 +32,7 @@ namespace PickingSystem_001
                     txtPath.Text = openFileDialog.FileName;
                     filePath = txtPath.Text;
                     writeRtbNotice("파일 업로드중...");
-                    handlerController.UploadExcelSheet(filePath);
+                    handlerController.ExcelToDataTable(filePath);
                 }
             }
         }
@@ -40,7 +41,11 @@ namespace PickingSystem_001
         {
             // DB 조회
             string strDate = dateTimePicker1.Value.ToString("yyyy-MM-dd");
-            handlerController.ReadStoredData(strDate);
+            DataTable dt = handlerController.ReadStoredData(strDate);
+            
+            // DataGridView 
+            dgv.AutoGenerateColumns = false;
+            dgv.DataSource = dt;
         }
 
         public void writeRtbNotice(string str)
@@ -53,9 +58,19 @@ namespace PickingSystem_001
             dac.MssqlClose();
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void btnReset_Click(object sender, EventArgs e)
         {
             rtbNotice.Clear();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgv2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

@@ -18,3 +18,11 @@ C:\Users\USER\source\repos\PickingSystem_001\Source\PickingSystem_001\obj\Debug\
 C:\Users\USER\source\repos\PickingSystem_001\Source\PickingSystem_001\obj\Debug\PickingSystem_001.exe
 C:\Users\USER\source\repos\PickingSystem_001\Source\PickingSystem_001\obj\Debug\PickingSystem_001.pdb
 C:\Users\USER\source\repos\PickingSystem_001\Source\PickingSystem_001\obj\Debug\PickingSystem_001.csprojResolveAssemblyReference.cache
+C:\Users\USER\source\repos\PickingSystem_001\Source\PickingSystem_001\bin\Debug\ExcelDataReader.DataSet.dll
+C:\Users\USER\source\repos\PickingSystem_001\Source\PickingSystem_001\bin\Debug\ExcelDataReader.dll
+C:\Users\USER\source\repos\PickingSystem_001\Source\PickingSystem_001\bin\Debug\System.ValueTuple.dll
+C:\Users\USER\source\repos\PickingSystem_001\Source\PickingSystem_001\bin\Debug\ExcelDataReader.pdb
+C:\Users\USER\source\repos\PickingSystem_001\Source\PickingSystem_001\bin\Debug\ExcelDataReader.xml
+C:\Users\USER\source\repos\PickingSystem_001\Source\PickingSystem_001\bin\Debug\ExcelDataReader.DataSet.pdb
+C:\Users\USER\source\repos\PickingSystem_001\Source\PickingSystem_001\bin\Debug\ExcelDataReader.DataSet.xml
+C:\Users\USER\source\repos\PickingSystem_001\Source\PickingSystem_001\bin\Debug\System.ValueTuple.xml

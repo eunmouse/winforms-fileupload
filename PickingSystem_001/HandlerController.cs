@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
+using System.Globalization;
 using System.IO;
-using System.Runtime.InteropServices;
-using Microsoft.Office.Interop.Excel;
-using Application = Microsoft.Office.Interop.Excel.Application;
-// using DataTable = Microsoft.Office.Interop.Excel.DataTable;
+using ExcelDataReader;
 using DataTable = System.Data.DataTable;
 
 namespace PickingSystem_001
@@ -22,7 +18,7 @@ namespace PickingSystem_001
             _form = form;
         }
 
-        public void ReadStoredData(string date)
+        public DataTable ReadStoredData(string date)
         {
             string query = "SELECT * FROM tb_rawdata WHERE picking_date = @date " +
                 "ORDER BY PICKING_DATE ASC";
@@ -31,118 +27,88 @@ namespace PickingSystem_001
             try
             {
                 // DB 조회 
-                List<Dictionary<string, object>> dataList = dac.ExcuteQuery(query, date);
-                foreach (Dictionary<string, object> dictionary in dataList)
-                {
-                    string pickingDate = dictionary["picking_date"].ToString();
-                    string custCode = dictionary["cust_code"].ToString();
-                    string custName = dictionary["cust_name"].ToString();
-                    string pickingCode = dictionary["picking_code"].ToString();
-                    string itemCode = dictionary["item_code"].ToString();
-                    string itemName = dictionary["item_name"].ToString();
-                    string qty = dictionary["qty"].ToString();
-                    _form.writeRtbNotice(pickingDate + " " + custCode + " " + custName + " " + pickingCode + " " + itemCode + " " + itemName + " " + qty);
-                }
+                DataTable dt = dac.ExcuteQuery(query, date);
+                return dt;
             }
             catch (Exception ex)
             {
                 _form.writeRtbNotice("데이터 불러오는 도중 오류 발생...");
                 Console.WriteLine("ReadStoredData 에서 오류 발생 : " + ex.Message);
             }
-            
-        }
-
-        public void UploadExcelSheet(string filePath)
-        {
-            Application application = new Application();
-            Workbook workbook = application.Workbooks.Open(filePath);
-            Worksheet worksheet = workbook.Worksheets[1]; // 1번째 Worksheet 에 대한 객체 가져오기 
-
-            // A 열부터 I 열까지 가져오기
-            Range range = worksheet.Range["A:I"]; // Range used = worksheet.UsedRange;
-            _form.writeRtbNotice("파일 데이터 읽고 데이터 DB에 바로 넣을거임... 시간 꽤 소요됨...");
-
-            // DataTable 생성 및 컬럼 설정
-            DataTable dt = new DataTable();
-            dt.Columns.Add("pickingDate", typeof(string));
-            dt.Columns.Add("custCode", typeof(string));
-            dt.Columns.Add("custName", typeof(string));
-            dt.Columns.Add("pickingCode", typeof(string));
-            dt.Columns.Add("itemCode", typeof(string));
-            dt.Columns.Add("itemName", typeof(string));
-            dt.Columns.Add("qty", typeof(int));
-
-            try
-            {
-                int row = 2; // 두번째 행 부터 시작 
-                do
-                {
-                    // 엑셀 A열 셀이 공백/Null 이면 반복문에서 break; 로 빠지도록 수정 
-                    string temp = Convert.ToString(((Range)range.Cells[row, 1]).Value2); // A열 출고구분
-                    if (string.IsNullOrWhiteSpace(temp))
-                    {
-                        break;
-                    }
-                    DataRow dr = dt.NewRow();
-                    // Object 타입 반환 (실제로는 COM 객체 -> Excel.Range) 
-                    dr["pickingDate"] = Convert.ToString(((Range)range.Cells[row, 2]).Value2); // B열 피킹일자
-                    dr["custCode"] = Convert.ToString(((Range)range.Cells[row, 5]).Value2); // E열 거래처코드
-                    dr["custName"] = Convert.ToString(((Range)range.Cells[row, 6]).Value2); // F열 거래처명
-                    dr["pickingCode"] = Convert.ToString(((Range)range.Cells[row, 4]).Value2); // D열 피킹번호
-                    dr["itemCode"] = Convert.ToString(((Range)range.Cells[row, 7]).Value2); // G열 제품코드
-                    dr["itemName"] = Convert.ToString(((Range)range.Cells[row, 8]).Value2); // H열 제품명 
-                    dr["qty"] = Convert.ToInt32(((Range)range.Cells[row, 9]).Value2); // I열 피킹수량
-
-                    // 행 추가 
-                    dt.Rows.Add(dr);   
-                    row++;
-                }
-                while (true);
-                // 한줄씩 
-                string query = "INSERT INTO tb_rawdata (PICKING_DATE, CUST_CODE, CUST_NAME, PICKING_CODE, ITEM_CODE, ITEM_NAME, QTY)" +
-                    "VALUES (@pickingDate, @custCode, @custName, @pickingCode, @itemCode, @itemName, @qty)";
-                dac.ExcuteNonQuery(query, dt.Rows);
-                //int result = dac.ExcuteNonQuery(query, dt.Rows);
-
-                _form.writeRtbNotice("데이터 입력성공 축하...");
-                //_form.writeRtbNotice("총 " + result + "건의 데이터가 추가되었습니다.");
-
-                DisposeObject(range);
-                DisposeObject(worksheet);
-                DisposeObject(workbook);
-                DisposeObject(application);
-            }
-            catch (Exception ex)
-            {
-                _form.writeRtbNotice("파일 읽는 도중 오류 발생...");
-                Console.WriteLine("ReadExcelSheet 에서 오류 발생 : " + ex.Message);
-
-                DisposeObject(range);
-                DisposeObject(worksheet);
-                DisposeObject(workbook);
-                DisposeObject(application);
-            }
+            return null;
         }
         
-        #region 엑셀 객체 해제 메서드 
-        public void DisposeObject(object obj)
+        public void ExcelToDataTable(string fileName)
         {
-            try
+            using (var stream = File.Open(fileName, FileMode.Open, FileAccess.Read))
             {
-                if (obj != null)
+                try
                 {
-                    // 액셀 객체 해제 
-                    Marshal.ReleaseComObject(obj);
-                    obj = null;
+                    using (var reader = ExcelReaderFactory.CreateReader(stream))
+                    {
+                        // 읽은 Excel 파일을 DataSet 으로 변환 
+                        // ExcelDataSetConfiguration 을 통해 설정 지정 
+                        _form.writeRtbNotice("파일 읽기 시작...");
+
+                        var dataSet = reader.AsDataSet(new ExcelDataSetConfiguration()
+                        {
+                            // 람다식 / 매개변수(IExcelDataReader)를 받아서 ExcelDataTableConfiguration 객체를 돌려준다. 
+                            // 람다식에서 매개변수를 반드시 써야 하는데, 실제로 그 값을 안쓸 경우 _ 같은 식으로 표시 
+                            ConfigureDataTable = (_) => new ExcelDataTableConfiguration()
+                            {
+                                UseHeaderRow = true, // 첫번째 행을 DataTable 컬럼명으로 사용 (true)
+                                FilterColumn = (rowReader, columnIndex) =>
+                                {
+                                    return columnIndex == 1 || columnIndex == 3 || columnIndex == 4 || columnIndex == 5 || columnIndex == 6 || columnIndex == 7 || columnIndex == 8; // 몇번째 컬럼을 포함할지 결정하는 필터 
+                                }
+                            }
+                        });
+                        DataTable excelDt = dataSet.Tables["RAW출고"]; // 엑셀 원본 
+
+                        DataTable dt = new DataTable(); // 내가 쓸 DataTable (DB 스키마에 맞게 타입 지정) 
+                        dt.Columns.Add("피킹일자", typeof(DateTime)); // Date 컬럼
+                        dt.Columns.Add("피킹번호", typeof(string));
+                        dt.Columns.Add("거래처코드", typeof(string));
+                        dt.Columns.Add("거래처명", typeof(string));
+                        dt.Columns.Add("제품코드", typeof(string));
+                        dt.Columns.Add("제품명", typeof(string));
+                        dt.Columns.Add("피킹수량", typeof(int));
+
+                        // 변환 루프 
+                        foreach (DataRow row in excelDt.Rows)
+                        {
+                            DataRow newRow = dt.NewRow();
+
+                            // 날짜 변환 
+                            var pickingDate = DateTime.ParseExact(row["피킹\n일자"].ToString(), "yyyyMMdd", CultureInfo.InvariantCulture);
+                            newRow["피킹일자"] = pickingDate;
+
+                            // 문자열 
+                            newRow["피킹번호"] = row["피킹\n번호"].ToString();
+                            newRow["거래처코드"] = row["거래처\n코드"].ToString();
+                            newRow["거래처명"] = row["거래처명"].ToString();
+                            newRow["제품코드"] = row["제품\n코드"].ToString();
+                            newRow["제품명"] = row["제품명"].ToString();
+
+                            // 정수 변환 
+                            if (int.TryParse(row["피킹\n수량"].ToString(), out int qty))
+                                newRow["피킹수량"] = qty;
+                            else
+                                newRow["피킹수량"] = 0;
+
+                            dt.Rows.Add(newRow);
+                            
+                        }
+                        dac.BulkInsert(dt);
+
+                        _form.writeRtbNotice("데이터 입력성공 축하...");
+                    }
+                } catch (Exception ex)
+                {
+                    Console.WriteLine("ExcelToDataTable 에서 오류 터짐 ㅠㅠ : " + ex.Message);
                 }
-            }
-            catch (Exception ex)
-            {
-                obj = null;
-                Console.WriteLine("DisposeObject 에서 오류 발생 : " + ex.Message);
-                throw; // 예외는 위로(호출자 방향으로) 전달 됨, 로그 찍은 후 예외 그대로 다시 던짐 
+                
             }
         }
-        #endregion
     }
 }

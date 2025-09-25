@@ -38,6 +38,14 @@
             this.lblSelect = new System.Windows.Forms.Label();
             this.btnReset = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dgv = new System.Windows.Forms.DataGridView();
+            this.PickDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PickNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PickQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -84,7 +92,7 @@
             resources.ApplyResources(this.btnReset, "btnReset");
             this.btnReset.Name = "btnReset";
             this.btnReset.UseVisualStyleBackColor = true;
-            this.btnReset.Click += new System.EventHandler(this.button1_Click_1);
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // dateTimePicker1
             // 
@@ -92,10 +100,56 @@
             resources.ApplyResources(this.dateTimePicker1, "dateTimePicker1");
             this.dateTimePicker1.Name = "dateTimePicker1";
             // 
+            // dgv
+            // 
+            this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.PickDate,
+            this.PickNo,
+            this.ProductCode,
+            this.PickQty});
+            resources.ApplyResources(this.dgv, "dgv");
+            this.dgv.Name = "dgv";
+            this.dgv.RowTemplate.Height = 23;
+            this.dgv.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv2_CellContentClick);
+            // 
+            // PickDate
+            // 
+            this.PickDate.DataPropertyName = "PICKING_DATE";
+            resources.ApplyResources(this.PickDate, "PickDate");
+            this.PickDate.Name = "PickDate";
+            // 
+            // PickNo
+            // 
+            this.PickNo.DataPropertyName = "PICKING_CODE";
+            resources.ApplyResources(this.PickNo, "PickNo");
+            this.PickNo.Name = "PickNo";
+            // 
+            // ProductCode
+            // 
+            this.ProductCode.DataPropertyName = "ITEM_CODE";
+            resources.ApplyResources(this.ProductCode, "ProductCode");
+            this.ProductCode.Name = "ProductCode";
+            // 
+            // PickQty
+            // 
+            this.PickQty.DataPropertyName = "QTY";
+            resources.ApplyResources(this.PickQty, "PickQty");
+            this.PickQty.Name = "PickQty";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            resources.ApplyResources(this.dataGridView1, "dataGridView1");
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 23;
+            // 
             // frmSystem
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgv);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.lblSelect);
@@ -106,6 +160,8 @@
             this.Controls.Add(this.btnUpload);
             this.Name = "frmSystem";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmSystem_FormClosing);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -122,6 +178,12 @@
         private System.Windows.Forms.Label lblSelect;
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DataGridView dgv;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PickDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PickNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProductCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PickQty;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
 

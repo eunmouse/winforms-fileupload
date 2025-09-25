@@ -1,9 +1,8 @@
-﻿using Microsoft.Office.Interop.Excel;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using DataTable = System.Data.DataTable;
 
 namespace PickingSystem_001
 {
@@ -13,7 +12,6 @@ namespace PickingSystem_001
         private string dbAddr = ConfigurationManager.ConnectionStrings["DBCON"].ConnectionString;
         private SqlConnection connection; // DB 연결
         private SqlCommand command; // DB 에 쿼리문 전달
-        private SqlDataAdapter adapter; // DB 에서 반환된 데이터를 DataSet 클래스로 변환
 
         public void MssqlOpen()
         {
@@ -43,15 +41,14 @@ namespace PickingSystem_001
                 }
             }
         }
-        public List<Dictionary<string, object>> ExcuteQuery(string sql, string date)
+        public DataTable ExcuteQuery(string sql, string date)
         {
             // 쿼리 실행 (SELECT 문) 
             using (connection = new SqlConnection(dbAddr))
             {
                 connection.Open();
-                adapter = new SqlDataAdapter();
+                SqlDataAdapter adapter = new SqlDataAdapter(); // DB 에서 반환된 데이터를 DataSet 클래스로 변환 
                 DataSet ds = new DataSet();
-                List<Dictionary<string, object>> list = new List<Dictionary<string, object>>();
                 
                 // 파라미터 타입 및 값 입력
                 using (command = new SqlCommand(sql, connection))
@@ -62,58 +59,48 @@ namespace PickingSystem_001
                  
                     if (ds.Tables.Count > 0)
                     {
-                        foreach (DataRow dr in ds.Tables[0].Rows)
+                        foreach (DataTable dt in ds.Tables)
                         {
-                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
-                            dictionary["picking_date"] = dr["PICKING_DATE"].ToString();
-                            dictionary["cust_code"] = dr["CUST_CODE"].ToString();
-                            dictionary["cust_name"] = dr["CUST_NAME"].ToString();
-                            dictionary["picking_code"] = dr["PICKING_CODE"].ToString();
-                            dictionary["item_code"] = dr["ITEM_CODE"].ToString();
-                            dictionary["item_name"] = dr["ITEM_NAME"].ToString();
-                            dictionary["qty"] = dr["QTY"].ToString();
-                            list.Add(dictionary);
+                            return dt;
                         }
-                        return list;
                     }
-                    else
-                    {
-                        return list;
-                    }
+                    return null;
                 }
             }
         }
-        public void ExcuteNonQuery(string sql, DataRowCollection rows)
+        public void BulkInsert(DataTable dt)
         {
-            // 쿼리 실행 (INSERT / UPDATE / DELETE 문)
             using (connection = new SqlConnection(dbAddr))
             {
                 connection.Open();
-                //int result = 0;
-
-                using (command = new SqlCommand(sql, connection))
+                using (SqlTransaction transaction = connection.BeginTransaction())
                 {
-                    command.Parameters.Add("@pickingDate", SqlDbType.NVarChar);
-                    command.Parameters.Add("@custCode", SqlDbType.NVarChar);
-                    command.Parameters.Add("@custName", SqlDbType.NVarChar);
-                    command.Parameters.Add("@pickingCode", SqlDbType.NVarChar);
-                    command.Parameters.Add("@itemCode", SqlDbType.NVarChar);
-                    command.Parameters.Add("@itemName", SqlDbType.NVarChar);
-                    command.Parameters.Add("@qty", SqlDbType.Int);
-
-                    foreach (DataRow dr in rows)
+                    // SqlBulkCopy 생성자 (SqlConnection, SqlBulkCopyOptions, SqlTransaction)
+                    using (SqlBulkCopy bulkCopy = new SqlBulkCopy(connection, SqlBulkCopyOptions.Default, transaction)) // .Default INSERT 할 때 DB 가 알아서 자동값 부여 
                     {
-                        // SQL 파라미터 바인딩
-                        command.Parameters["@pickingDate"].Value = dr["pickingDate"]; 
-                        command.Parameters["@custCode"].Value = dr["custCode"];
-                        command.Parameters["@custName"].Value = dr["custName"];
-                        command.Parameters["@pickingCode"].Value = dr["pickingCode"];
-                        command.Parameters["@itemCode"].Value = dr["itemCode"];
-                        command.Parameters["@itemName"].Value = dr["itemName"];
-                        command.Parameters["@qty"].Value = dr["qty"];
-                        command.ExecuteNonQuery();
+                        bulkCopy.DestinationTableName = "dbo.TB_RAWDATA";
+
+                        // DataTable 컬럼명<>DB 컬럼명 매핑
+                        bulkCopy.ColumnMappings.Add("피킹일자", "PICKING_DATE");
+                        bulkCopy.ColumnMappings.Add("피킹번호", "PICKING_CODE");
+                        bulkCopy.ColumnMappings.Add("거래처코드", "CUST_CODE");
+                        bulkCopy.ColumnMappings.Add("거래처명", "CUST_NAME");
+                        bulkCopy.ColumnMappings.Add("제품코드", "ITEM_CODE");
+                        bulkCopy.ColumnMappings.Add("제품명", "ITEM_NAME");
+                        bulkCopy.ColumnMappings.Add("피킹수량", "QTY");
+
+                        try
+                        {
+                            bulkCopy.BatchSize = 10000; // 한 번에 전송할 행 개수 
+                            bulkCopy.WriteToServer(dt);
+                            transaction.Commit();
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("BulkInsert 중 터짐ㅠㅠ 사유 : " + ex.Message);
+                            transaction.Rollback();
+                        }
                     }
-                    //return result;
                 }
             }
         }

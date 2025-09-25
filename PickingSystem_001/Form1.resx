@@ -144,7 +144,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnUpload.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnSelect.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -172,7 +172,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnSelect.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="txtPath.Location" type="System.Drawing.Point, System.Drawing">
     <value>143, 9</value>
@@ -193,13 +193,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;txtPath.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="rtbNotice.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 77</value>
   </data>
   <data name="rtbNotice.Size" type="System.Drawing.Size, System.Drawing">
-    <value>700, 345</value>
+    <value>561, 79</value>
   </data>
   <data name="rtbNotice.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -217,7 +217,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rtbNotice.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="lblUpload.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -244,7 +244,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblUpload.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="lblSelect.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -274,7 +274,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblSelect.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="btnReset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -301,7 +301,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnReset.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="dateTimePicker1.CustomFormat" xml:space="preserve">
     <value>yyyy-MM-dd</value>
@@ -328,6 +328,72 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;dateTimePicker1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <metadata name="PickDate.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="PickDate.HeaderText" xml:space="preserve">
+    <value>PickDate</value>
+  </data>
+  <metadata name="PickNo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="PickNo.HeaderText" xml:space="preserve">
+    <value>PickNo</value>
+  </data>
+  <metadata name="ProductCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ProductCode.HeaderText" xml:space="preserve">
+    <value>ProductCode</value>
+  </data>
+  <metadata name="PickQty.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="PickQty.HeaderText" xml:space="preserve">
+    <value>PickQty</value>
+  </data>
+  <data name="dgv.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 162</value>
+  </data>
+  <data name="dgv.Size" type="System.Drawing.Size, System.Drawing">
+    <value>561, 261</value>
+  </data>
+  <data name="dgv.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;dgv.Name" xml:space="preserve">
+    <value>dgv</value>
+  </data>
+  <data name="&gt;&gt;dgv.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dgv.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;dgv.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="dataGridView1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>687, 238</value>
+  </data>
+  <data name="dataGridView1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>8, 8</value>
+  </data>
+  <data name="dataGridView1.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;dataGridView1.Name" xml:space="preserve">
+    <value>dataGridView1</value>
+  </data>
+  <data name="&gt;&gt;dataGridView1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridView1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;dataGridView1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -337,7 +403,7 @@
     <value>7, 12</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>724, 435</value>
+    <value>588, 435</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>PickingSystem_001</value>
@@ -347,6 +413,30 @@
   </data>
   <data name="&gt;&gt;openFileDialog1.Type" xml:space="preserve">
     <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PickDate.Name" xml:space="preserve">
+    <value>PickDate</value>
+  </data>
+  <data name="&gt;&gt;PickDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PickNo.Name" xml:space="preserve">
+    <value>PickNo</value>
+  </data>
+  <data name="&gt;&gt;PickNo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ProductCode.Name" xml:space="preserve">
+    <value>ProductCode</value>
+  </data>
+  <data name="&gt;&gt;ProductCode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PickQty.Name" xml:space="preserve">
+    <value>PickQty</value>
+  </data>
+  <data name="&gt;&gt;PickQty.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>frmSystem</value>
